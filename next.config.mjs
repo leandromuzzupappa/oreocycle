@@ -1,8 +1,15 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  /* images: [
-    "bucket-rn-40-dev-test.s3.amazonaws.com"
-  ] */
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'bucket-rn-40-dev-test.s3.amazonaws.com',
+        port: '',
+        pathname: '/**'
+      },
+    ]
+  },
 };
 
 export default nextConfig;
