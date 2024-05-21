@@ -24,6 +24,7 @@
       "@organisms/*": ["./src/components/organisms/*"],
       "@templates/*": ["./src/components/templates/*"],
       "@assets/*": ["./src/assets/*"],
+      "@config/*": ["./src/config/*"],
       "@components/*": ["./src/components/*"],
       "@data/*": ["./src/data/*"],
       "@/*": ["./src/*"]
