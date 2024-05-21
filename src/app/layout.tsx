@@ -1,8 +1,29 @@
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import "@assets/styles/globals.css";
 
+import type { Metadata } from "next";
+import { Inter } from "next/font/google";
+import localFont from "next/font/local";
+
 const inter = Inter({ subsets: ["latin"] });
+export const guardianFont = localFont({
+  src: [
+    {
+      path: "../assets/fonts/guardiansans-regular.woff",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "../assets/fonts/guardiansans-medium.woff",
+      weight: "500",
+      style: "normal",
+    },
+    {
+      path: "../assets/fonts/guardiansans-semibold.woff",
+      weight: "600",
+      style: "normal",
+    },
+  ],
+});
 
 export const metadata: Metadata = {
   title: "Create Next App",
