@@ -1,18 +1,17 @@
-import Image from "next/image";
-
+import Link from "next/link";
+import { A2Icon, IconNames } from "@atoms/A2Icon";
 import { M1HeaderNav } from "@molecules/M1HeaderNav";
 
 export const O1Header = () => {
   return (
-    <header className="flex justify-between gap-4 bg-black px-8 py-6 font-bold text-white">
-      <div className="">
-        <Image
-          src="/images/logo.svg"
-          alt="Royal Enfield logo"
-          width={200}
-          height={30}
+    <header className="flex justify-between gap-4 px-8 py-6 align-middle">
+      <Link href="/">
+        <A2Icon
+          name={IconNames.SIMPLI_LOGO}
+          label="SimpliMuv logo"
+          classList="hover:text-primary text-[#903DF7]"
         />
-      </div>
+      </Link>
       <M1HeaderNav />
     </header>
   );

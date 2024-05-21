@@ -20,7 +20,7 @@ export const M1HeaderNav = () => {
   return (
     <>
       <nav>
-        <ul className=" flex gap-4">
+        <ul className="flex gap-4">
           {menuItems.map(({ label, slug, newTab }) => (
             <li key={`header-link-${slug}`} className="hover:text-primary">
               <A1Link label={label} url={slug} newTab={newTab} />
@@ -28,16 +28,23 @@ export const M1HeaderNav = () => {
           ))}
         </ul>
       </nav>
-      <div>
+      <div className="header-actions">
         <ul className=" flex gap-4">
           <li className="hover:text-primary">
-            <button>Login</button>
-          </li>
-          <li className="hover:text-primary">
-            <button>
+            <button className="flex align-middle">
               <A2Icon
                 name={IconNames.SEARCH_ICON}
-                classList="hover:text-primary"
+                classList="hover:text-primary mr-2"
+              />
+              Search
+            </button>
+          </li>
+          <li>
+            <button className="flex align-middle">
+              <A2Icon
+                name={IconNames.SHOPPING_CART_ICON}
+                classList="hover:text-primary mr-2"
+                label="Shopping cart"
               />
             </button>
           </li>
