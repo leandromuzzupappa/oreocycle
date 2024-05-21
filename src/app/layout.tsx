@@ -1,27 +1,9 @@
 import "@assets/styles/globals.css";
 
 import type { Metadata } from "next";
-import localFont from "next/font/local";
 
-const guardianFont = localFont({
-  src: [
-    {
-      path: "../assets/fonts/guardiansans-regular.woff",
-      weight: "400",
-      style: "normal",
-    },
-    {
-      path: "../assets/fonts/guardiansans-medium.woff",
-      weight: "500",
-      style: "normal",
-    },
-    {
-      path: "../assets/fonts/guardiansans-semibold.woff",
-      weight: "600",
-      style: "normal",
-    },
-  ],
-});
+import { Inter } from "next/font/google";
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Motorcycles | All New Model Motorbikes in USA | Royal Enfield",
@@ -53,7 +35,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={guardianFont.className}>{children}</body>
+      <body className={inter.className}>{children}</body>
     </html>
   );
 }
