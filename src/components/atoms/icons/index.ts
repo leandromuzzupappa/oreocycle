@@ -1,5 +1,6 @@
+import { ArrowRightIcon } from "./ArrowRightIcon";
 import { SearchIcon } from "./SearchIcon";
-import { SimpliMuvLogo } from "./SimpliMuvLogo";
 import { ShoppingCartIcon } from "./ShoppingCartIcon";
+import { SimpliMuvLogo } from "./SimpliMuvLogo";
 
-export { SearchIcon, SimpliMuvLogo, ShoppingCartIcon };
+export { ArrowRightIcon, SearchIcon, ShoppingCartIcon, SimpliMuvLogo };

@@ -1,4 +1,9 @@
-import { SearchIcon, SimpliMuvLogo, ShoppingCartIcon } from "./icons";
+import {
+  ArrowRightIcon,
+  SearchIcon,
+  ShoppingCartIcon,
+  SimpliMuvLogo,
+} from "./icons";
 
 type IconProps = {
   name: IconNames;
@@ -13,7 +18,7 @@ export const A2Icon = ({ name, classList = "", selfRef, label }: IconProps) => {
   return (
     <span
       ref={selfRef}
-      className={`${classList} relative inline-block transition duration-100 ease-in-out`}
+      className={classList}
       {...(label ? { "aria-label": label } : {})}
     >
       <IconComponent />
@@ -22,13 +27,15 @@ export const A2Icon = ({ name, classList = "", selfRef, label }: IconProps) => {
 };
 
 export enum IconNames {
+  ARROW_RIGHT_ICON = "arrow-right",
   SEARCH_ICON = "search",
-  SIMPLI_LOGO = "simpli-logo",
   SHOPPING_CART_ICON = "shopping-cart",
+  SIMPLI_LOGO = "simpli-logo",
 }
 
 export const iconList = {
+  [IconNames.ARROW_RIGHT_ICON]: ArrowRightIcon,
   [IconNames.SEARCH_ICON]: SearchIcon,
-  [IconNames.SIMPLI_LOGO]: SimpliMuvLogo,
   [IconNames.SHOPPING_CART_ICON]: ShoppingCartIcon,
+  [IconNames.SIMPLI_LOGO]: SimpliMuvLogo,
 };
