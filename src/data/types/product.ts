@@ -1,3 +1,8 @@
+export enum CategoryEnum {
+  ACCESSORIES = "accessories",
+  MOTOCYCLES = "motocycles",
+}
+
 export type Product = {
   name: string;
   type: Brand;

@@ -1,6 +1,6 @@
 import { Product } from "@data/types/product";
 
-export const accessories: Product[] = [
+export const accessoriesMock: Product[] = [
   {
     name: "Portaequipaje",
     type: {

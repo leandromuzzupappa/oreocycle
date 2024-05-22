@@ -4,6 +4,6 @@ export const endpoints = {
     "https://nathan.tasa.develop.simplitec.io/webhook/simplimuv",
   config: "/config",
   createLead: "/createlead",
-  accesories: "/products/accessories",
+  accessories: "/products/accessories",
   motocycles: "/products/motorcycles",
 };
