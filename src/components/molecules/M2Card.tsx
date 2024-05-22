@@ -1,13 +1,16 @@
 import Image from "next/image";
+import { M3CTA } from "@molecules/M3CTA";
 
 export type M2CardProps = {
   headline?: string;
   description?: string;
   eyebrow?: string;
   ctaLabel?: string;
+  slug?: string;
   image: string;
   alt?: string;
   lazy?: boolean;
+  overlay?: boolean | { show: boolean; color: string; opacity: number };
 };
 
 export const M2Card = ({
@@ -15,31 +18,44 @@ export const M2Card = ({
   description,
   eyebrow,
   ctaLabel,
+  slug,
   image,
   alt = "",
   lazy = false,
+  overlay = false,
 }: M2CardProps) => {
   return (
-    <article>
-      <div className="content-image">
+    <article className="relative aspect-square overflow-hidden rounded-lg">
+      <div className="relative h-full w-full">
         <Image
           src={image}
           alt={alt}
-          width={400}
-          height={400}
-          layout="responsive"
           loading={lazy ? "lazy" : "eager"}
+          layout="fill"
+          objectFit="cover"
+          priority={false}
         />
-      </div>
-      <div className="content-data">
-        {eyebrow && <small className="eyebrow">{eyebrow}</small>}
-        {headline && <h2 className="headline">{headline}</h2>}
-        {description && <p className="description">{description}</p>}
-        {ctaLabel && (
-          <a href="#" className="cta">
-            {ctaLabel}
-          </a>
+
+        {overlay && (
+          <div
+            className="overlay z-1 absolute inset-0 bg-[#000]"
+            style={{
+              opacity: typeof overlay === "object" ? overlay.opacity : ".2",
+            }}
+          />
         )}
+      </div>
+      <div className="content-data absolute bottom-0 w-full px-7 pb-7 text-white">
+        {eyebrow && (
+          <small className="eyebrow uppercase text-[#FFC107]">{eyebrow}</small>
+        )}
+        {headline && (
+          <h2 className="headline mb-4 text-balance text-2xl font-bold">
+            {headline}
+          </h2>
+        )}
+        {description && <p className="description mb-4">{description}</p>}
+        {ctaLabel && slug && <M3CTA label={ctaLabel} url={slug} />}
       </div>
     </article>
   );
