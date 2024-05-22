@@ -4,16 +4,25 @@ type A1LinkProps = {
   label: string;
   url: string;
   newTab?: boolean;
+  classList?: string;
+  children?: React.ReactNode;
 };
 
-export const A1Link = ({ label, url, newTab }: A1LinkProps) => {
+export const A1Link = ({
+  label,
+  url,
+  newTab,
+  children,
+  classList,
+}: A1LinkProps) => {
   return (
     <Link
-      className="hover:text-primary"
+      className={`hover:text-primary ${classList}`}
       href={url}
       {...(newTab ? { target: "_blank" } : {})}
     >
-      {label}
+      <span className="relative z-10">{label}</span>
+      {children && children}
     </Link>
   );
 };
