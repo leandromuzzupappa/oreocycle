@@ -23,6 +23,8 @@ const config: Config = {
       success: "#15803d",
       info: "#4e98d4",
       danger: "#dc2626",
+      purple: "#903DF7",
+      purpleDark: "#180A2A",
     },
     extend: {
       backgroundImage: {

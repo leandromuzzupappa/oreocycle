@@ -27,6 +27,7 @@
       "@config/*": ["./src/config/*"],
       "@components/*": ["./src/components/*"],
       "@data/*": ["./src/data/*"],
+      "@hooks/*": ["./src/hooks/*"],
       "@services/*": ["./src/services/*"],
       "@/*": ["./src/*"]
     }
