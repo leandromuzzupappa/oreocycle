@@ -2,6 +2,7 @@ import Image from "next/image";
 import { M3CTA } from "@molecules/M3CTA";
 
 export type M2CardProps = {
+  classlist?: string;
   headline?: string;
   description?: string;
   eyebrow?: string;
@@ -14,6 +15,7 @@ export type M2CardProps = {
 };
 
 export const M2Card = ({
+  classlist,
   headline,
   description,
   eyebrow,
@@ -25,7 +27,9 @@ export const M2Card = ({
   overlay = false,
 }: M2CardProps) => {
   return (
-    <article className="relative aspect-square overflow-hidden rounded-lg">
+    <article
+      className={`${classlist ?? ""} relative aspect-square overflow-hidden rounded-lg`}
+    >
       <div className="relative h-full w-full">
         <Image
           src={image}
