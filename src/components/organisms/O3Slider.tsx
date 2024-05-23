@@ -61,7 +61,7 @@ export const O3Slider = ({ slides, options }: O3SliderProps) => {
       </div>
 
       {arrows && (
-        <div className="slider-controls text-purple absolute top-[50%] z-10 hidden w-full justify-between lg:flex">
+        <div className="slider-controls text-purple absolute top-[50%] z-10 hidden w-full -translate-y-2/4 justify-between lg:flex">
           <M4SliderArrow
             direction="prev"
             classList="-left-20"
