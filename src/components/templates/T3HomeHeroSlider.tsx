@@ -37,11 +37,11 @@ export const T3HomeHeroSlider = () => {
   const options: O3OptionsType = {
     classList: {
       container: "",
-      slide: "w-full h-[450px]",
+      slide: "h-[450px]",
     },
     arrows: true,
     pagination: true,
   };
 
-  return <O3Slider slides={sliderData} options={options} />;
+  return <O3Slider id="home-banner" slides={sliderData} options={options} />;
 };

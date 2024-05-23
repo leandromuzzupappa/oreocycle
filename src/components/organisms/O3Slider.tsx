@@ -3,6 +3,7 @@
 import { EmblaOptionsType } from "embla-carousel";
 import useEmblaCarousel from "embla-carousel-react";
 import { A3SliderPaginationButton } from "@atoms/A3SliderPaginationButton";
+import { A4SliderSlide } from "@atoms/A4SliderSlide";
 import { M2Card } from "@molecules/M2Card";
 import { M4SliderArrow } from "@molecules/M4SliderArrow";
 import { usePrevNextButtons } from "@hooks/useSliderButtons";
@@ -12,10 +13,13 @@ export type O3OptionsType = EmblaOptionsType & {
   classList?: { container: string; slide: string };
   pagination?: boolean;
   arrows?: boolean;
+  slidesPerView?: number;
 };
 
 type O3SliderProps = {
-  slides: {
+  children?: React.ReactNode;
+  id?: string;
+  slides?: {
     headline: string;
     description: string;
     eyebrow: string;
@@ -28,9 +32,15 @@ type O3SliderProps = {
   options: O3OptionsType;
 };
 
-export const O3Slider = ({ slides, options }: O3SliderProps) => {
-  const { classList, pagination, arrows } = options;
+export const O3Slider = ({
+  children,
+  id = `slider-${Math.floor(Math.random() * 1000)}`,
+  slides,
+  options,
+}: O3SliderProps) => {
+  const hasSlides = slides && slides.length > 0;
 
+  const { classList, pagination, arrows, slidesPerView = 1 } = options;
   const [emblaRef, emblaApi] = useEmblaCarousel(options);
   const {
     prevBtnDisabled,
@@ -42,21 +52,46 @@ export const O3Slider = ({ slides, options }: O3SliderProps) => {
   const { selectedIndex, scrollSnaps, onDotButtonClick } =
     useSliderPagination(emblaApi);
 
+  const handleSlidePerView = (): string => {
+    if (slidesPerView <= 1) return "w-full";
+
+    const lgSizes = [
+      "",
+      "",
+      "[&>.slider-slide]:lg:w-1/2",
+      "[&>.slider-slide]:lg:w-1/3",
+      "[&>.slider-slide]:lg:w-1/4",
+      "[&>.slider-slide]:lg:w-1/5",
+      "[&>.slider-slide]:lg:w-1/6",
+    ];
+
+    const i = slidesPerView <= 6 ? slidesPerView : lgSizes.length - 1;
+
+    return `[&>.slider-slide]:md:w-1/2 ${lgSizes[i]}`;
+  };
+
+  const renderSlides = () => {
+    if (hasSlides) {
+      return slides.map((slide, index) => (
+        <A4SliderSlide key={id + index} classList={classList?.slide ?? ""}>
+          <M2Card {...slide} classlist="w-full h-full" />
+        </A4SliderSlide>
+      ));
+    }
+
+    return children;
+  };
+
   return (
-    <div className="slider relative w-full">
+    <div className="slider relative w-full" data-test-id={id}>
       <div
         className={`slider-viewport ${classList?.container ?? ""} overflow-hidden`}
         ref={emblaRef}
       >
-        <div className="slider-container backface-hidden touch-action-pan-y touch-action-pinch-zoom ml-neg-slide-spacing flex">
-          {slides.map((slide, index) => (
-            <div
-              key={index}
-              className={`slider-slider ${classList?.slide ?? ""} flex-0 w-full min-w-0 flex-none`}
-            >
-              <M2Card {...slide} classlist="w-full h-full" />
-            </div>
-          ))}
+        <div
+          className={`slider-container backface-hidden touch-action-pan-y touch-action-pinch-zoom ml-neg-slide-spacing flex ${handleSlidePerView()}`}
+        >
+          {renderSlides()}
         </div>
       </div>
 
