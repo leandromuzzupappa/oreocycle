@@ -3,6 +3,8 @@ import {
   SearchIcon,
   ShoppingCartIcon,
   SimpliMuvLogo,
+  SliderArrowLeft,
+  SliderArrowRight,
 } from "./icons";
 
 type IconProps = {
@@ -31,6 +33,8 @@ export enum IconNames {
   SEARCH_ICON = "search",
   SHOPPING_CART_ICON = "shopping-cart",
   SIMPLI_LOGO = "simpli-logo",
+  SLIDER_ARROW_LEFT = "slider-arrow-left",
+  SLIDER_ARROW_RIGHT = "slider-arrow-right",
 }
 
 export const iconList = {
@@ -38,4 +42,6 @@ export const iconList = {
   [IconNames.SEARCH_ICON]: SearchIcon,
   [IconNames.SHOPPING_CART_ICON]: ShoppingCartIcon,
   [IconNames.SIMPLI_LOGO]: SimpliMuvLogo,
+  [IconNames.SLIDER_ARROW_LEFT]: SliderArrowLeft,
+  [IconNames.SLIDER_ARROW_RIGHT]: SliderArrowRight,
 };
