@@ -1,12 +1,27 @@
-/* p/ Lenny del futuro: mover los renders a componentes separados
+/* p/ Lenny del futuro:
+ * [] mover los renders a componentes separados
+ * [] crear un metodo o un hook para renderizar features segun el tipo
+ * [] pedir logica para las cuotas, no creo el modulo porque no tiene sentido
+ *    renderizar un string pelado
+ *
+ * p/ Simpli team -- Perdon por este NoMstruo
  */
 
+import Link from "next/link";
 import Image from "next/image";
+import { A1Link } from "@atoms/A1Link";
 import { A2Icon, IconNames } from "@atoms/A2Icon";
+import { M3CTA } from "./M3CTA";
 
-type FeatureType = {
+export type FeatureType = {
   type: "date" | "time" | "engine" | "category" | "height";
   value: string;
+};
+
+export type SwatchesType = {
+  color: string;
+  image: string;
+  label: string;
 };
 
 type M5ProductCardProps = {
@@ -20,8 +35,23 @@ type M5ProductCardProps = {
   features?: FeatureType[];
   isOnSale?: boolean;
   badge?: string;
-  swatches?: unknown[];
+  swatches?: SwatchesType[];
+  link: string;
+  classList?: string;
 };
+
+export interface M5ProductCardMinimalProps
+  extends Omit<
+    M5ProductCardProps,
+    | "price"
+    | "priceDiscounted"
+    | "priceCurrency"
+    | "pickupPoint"
+    | "features"
+    | "isOnSale"
+    | "badge"
+    | "swatches"
+  > {}
 
 enum FeatureTypeIconMap {
   date = "DATE_ICON",
@@ -39,6 +69,7 @@ enum FeatureTypeNamesMap {
   height = "Altura",
 }
 
+// Mocks for testing
 /* const mockFeaturesDateTime: FeatureType[] = [
   {
     type: "date",
@@ -50,7 +81,7 @@ enum FeatureTypeNamesMap {
   },
 ]; */
 
-const mockFeaturesProductFeatures: FeatureType[] = [
+/* const mockFeaturesProductFeatures: FeatureType[] = [
   {
     type: "engine",
     value: "500cc",
@@ -63,38 +94,75 @@ const mockFeaturesProductFeatures: FeatureType[] = [
     type: "height",
     value: "1.2m",
   },
-];
+]; */
+
+/* const swatchesMock: SwatchesType[] = [
+  {
+    color: "#FF0000",
+    image:
+      "https://bucket-rn-40-dev-test.s3.amazonaws.com/thumbnail_large_c94a96bb_0597_4243_a2cc_e73293c98e8b_e91e3683a9.webp",
+    label: "Fireball Red",
+  },
+  {
+    color: "#0000FF",
+    image:
+      "https://bucket-rn-40-dev-test.s3.amazonaws.com/thumbnail_large_c94a96bb_0597_4243_a2cc_e73293c98e8b_e91e3683a9.webp",
+    label: "Ocean Blue",
+  },
+  {
+    color: "#000000",
+    image:
+      "https://bucket-rn-40-dev-test.s3.amazonaws.com/thumbnail_large_c94a96bb_0597_4243_a2cc_e73293c98e8b_e91e3683a9.webp",
+    label: "Coal Black",
+  },
+]; */
+
+/* const swatchesMockWithOne: SwatchesType[] = [
+  {
+    color: "#FF0000",
+    image:
+      "https://bucket-rn-40-dev-test.s3.amazonaws.com/thumbnail_large_c94a96bb_0597_4243_a2cc_e73293c98e8b_e91e3683a9.webp",
+    label: "Fireball Red",
+  },
+]; */
 
 export const M5ProductCard = ({
-  variant = "full",
+  variant = "minimal",
   name = "Heritage Classic",
   image = "https://bucket-rn-40-dev-test.s3.amazonaws.com/thumbnail_large_c94a96bb_0597_4243_a2cc_e73293c98e8b_e91e3683a9.webp",
   price = 29000,
-  priceDiscounted,
+  priceDiscounted = 25000,
   priceCurrency = "ARG",
   pickupPoint = "Royal Enfield Vicente López",
-  features = mockFeaturesProductFeatures,
+  features,
   isOnSale = true,
   badge = "Novedad",
   swatches,
+  link,
+  classList,
 }: M5ProductCardProps) => {
   const renderImage = () => {
     return (
-      <div className="product-image row-start-1 row-end-4 bg-[#ccc]">
+      <div className="product-image">
         <Image
           src={image}
           alt={name}
           width={255}
           height={255}
-          className="mx-auto"
+          className={`mx-auto ${variant === "CTA" ? "mt-6" : ""}`}
         />
       </div>
     );
   };
 
   const renderName = () => {
+    const minimalClasses =
+      variant === "CTA" ? "absolute inset-x-0 top-0 p-4" : "";
+
     return (
-      <h3 className="product-name w-full text-center text-2xl font-bold leading-tight">
+      <h3
+        className={`product-name w-full text-center text-2xl font-bold leading-tight ${minimalClasses}`}
+      >
         {name}
       </h3>
     );
@@ -102,9 +170,15 @@ export const M5ProductCard = ({
 
   const renderPrice = () => {
     return (
-      <p className="product-price text-center  text-lg font-bold text-secondary-disabled">
-        <small className="text-sm font-normal">{priceCurrency} </small>$
-        {price.toLocaleString()}
+      <p className="product-price flex items-center justify-center gap-2 text-center text-lg font-bold text-secondary-disabled">
+        <small className="text-sm font-normal">{priceCurrency} </small>
+        <span>${price.toLocaleString()}</span>
+
+        {priceDiscounted && (
+          <span className="font-normal text-secondary-disabled line-through">
+            ${priceDiscounted.toLocaleString()}
+          </span>
+        )}
       </p>
     );
   };
@@ -172,28 +246,81 @@ export const M5ProductCard = ({
     );
   };
 
-  const renderContent = () => {
+  const renderSwatches = () => {
+    // No swatches on the api
     return (
-      <div className="product-data row-span-3 p-4">
-        {renderName()}
-        {renderPrice()}
-        {renderPickupPoint()}
-        {renderFeatures()}
-        {isOnSale && renderOnSale()}
-        {badge && renderBadge()}
+      <div className="product-swatches">
+        <ul className="flex justify-center">
+          {swatches &&
+            swatches.map(({ color, label }) => {
+              return (
+                <li
+                  key={label}
+                  className={`relative -top-2 -mx-2 flex items-center gap-2 rounded-full border-2 border-[#EDEDED] ${swatches.length === 1 ? "pr-4" : ""}`}
+                >
+                  <span
+                    className="block h-8 w-8 rounded-full bg-black bg-opacity-50"
+                    style={{ backgroundColor: color }}
+                  ></span>
+                  {swatches.length === 1 && (
+                    <span className="text-sm font-semibold text-secondary-disabled">
+                      {label}
+                    </span>
+                  )}
+                </li>
+              );
+            })}
+        </ul>
       </div>
     );
   };
 
+  const renderCTA = () => {
+    return (
+      <div className="product-cta flex flex-col items-center justify-center gap-4">
+        <M3CTA
+          label="Descubrir más"
+          url={link}
+          classList="w-full gap-0 [&>.link-label]:mx-auto [&>.link-label]:left-2"
+        />
+        <A1Link label="Reservar" url="#" classList="text-[#903DF7]" />
+      </div>
+    );
+  };
+
+  const renderContent = () => {
+    return (
+      <div className="product-data p-4">
+        {variant === "full" && swatches && renderSwatches()}
+        {renderName()}
+        {variant !== "CTA" && renderPrice()}
+        {variant === "full" && pickupPoint && renderPickupPoint()}
+        {variant === "full" && features && renderFeatures()}
+        {variant !== "CTA" && isOnSale && renderOnSale()}
+        {variant !== "CTA" && badge && renderBadge()}
+        {variant === "CTA" && renderCTA()}
+      </div>
+    );
+  };
+
+  const renderProduct = () => {
+    return (
+      <article
+        className={`${classList} relative flex max-w-[300px] flex-col rounded-lg border border-[#b8b8b8]`}
+      >
+        {renderImage()}
+        {renderContent()}
+      </article>
+    );
+  };
+
   return (
-    <article
-      className="relative grid max-w-[300px] grid-rows-6 rounded-lg border border-[#b8b8b8]"
-      data-variant={variant}
-      data-priceDiscounted={priceDiscounted}
-      data-swatches={swatches}
-    >
-      {renderImage()}
-      {renderContent()}
-    </article>
+    <>
+      {variant === "CTA" ? (
+        renderProduct()
+      ) : (
+        <Link href={link}>{renderProduct()}</Link>
+      )}
+    </>
   );
 };
