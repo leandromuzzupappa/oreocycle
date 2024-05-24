@@ -24,7 +24,7 @@ export type SwatchesType = {
   label: string;
 };
 
-type M5ProductCardProps = {
+export type M5ProductCardProps = {
   variant: "CTA" | "minimal" | "full";
   name: string;
   image: string;
@@ -40,18 +40,13 @@ type M5ProductCardProps = {
   classList?: string;
 };
 
-export interface M5ProductCardMinimalProps
-  extends Omit<
-    M5ProductCardProps,
-    | "price"
-    | "priceDiscounted"
-    | "priceCurrency"
-    | "pickupPoint"
-    | "features"
-    | "isOnSale"
-    | "badge"
-    | "swatches"
-  > {}
+export type M5ProductCardCTAProps = {
+  variant: "CTA";
+  name: string;
+  image: string;
+  link: string;
+  classList?: string;
+};
 
 enum FeatureTypeIconMap {
   date = "DATE_ICON",
@@ -69,95 +64,34 @@ enum FeatureTypeNamesMap {
   height = "Altura",
 }
 
-// Mocks for testing
-/* const mockFeaturesDateTime: FeatureType[] = [
-  {
-    type: "date",
-    value: "15 de Marzo",
-  },
-  {
-    type: "time",
-    value: "2 Horas",
-  },
-]; */
-
-/* const mockFeaturesProductFeatures: FeatureType[] = [
-  {
-    type: "engine",
-    value: "500cc",
-  },
-  {
-    type: "category",
-    value: "Classic",
-  },
-  {
-    type: "height",
-    value: "1.2m",
-  },
-]; */
-
-/* const swatchesMock: SwatchesType[] = [
-  {
-    color: "#FF0000",
-    image:
-      "https://bucket-rn-40-dev-test.s3.amazonaws.com/thumbnail_large_c94a96bb_0597_4243_a2cc_e73293c98e8b_e91e3683a9.webp",
-    label: "Fireball Red",
-  },
-  {
-    color: "#0000FF",
-    image:
-      "https://bucket-rn-40-dev-test.s3.amazonaws.com/thumbnail_large_c94a96bb_0597_4243_a2cc_e73293c98e8b_e91e3683a9.webp",
-    label: "Ocean Blue",
-  },
-  {
-    color: "#000000",
-    image:
-      "https://bucket-rn-40-dev-test.s3.amazonaws.com/thumbnail_large_c94a96bb_0597_4243_a2cc_e73293c98e8b_e91e3683a9.webp",
-    label: "Coal Black",
-  },
-]; */
-
-/* const swatchesMockWithOne: SwatchesType[] = [
-  {
-    color: "#FF0000",
-    image:
-      "https://bucket-rn-40-dev-test.s3.amazonaws.com/thumbnail_large_c94a96bb_0597_4243_a2cc_e73293c98e8b_e91e3683a9.webp",
-    label: "Fireball Red",
-  },
-]; */
-
 export const M5ProductCard = ({
   variant = "minimal",
-  name = "Heritage Classic",
-  image = "https://bucket-rn-40-dev-test.s3.amazonaws.com/thumbnail_large_c94a96bb_0597_4243_a2cc_e73293c98e8b_e91e3683a9.webp",
-  price = 29000,
-  priceDiscounted = 25000,
+  name,
+  image,
+  price,
+  priceDiscounted,
   priceCurrency = "ARG",
-  pickupPoint = "Royal Enfield Vicente López",
+  pickupPoint,
   features,
-  isOnSale = true,
-  badge = "Novedad",
+  isOnSale = false,
+  badge,
   swatches,
   link,
   classList,
 }: M5ProductCardProps) => {
   const renderImage = () => {
     return (
-      <div className="product-image">
-        <Image
-          src={image}
-          alt={name}
-          width={255}
-          height={255}
-          className={`mx-auto ${variant === "CTA" ? "mt-6" : ""}`}
-        />
+      <div
+        className={`product-image relative min-h-40 w-full overflow-hidden ${variant === "CTA" ? "mt-10" : ""}`}
+      >
+        <Image src={image} alt={name} fill={true} objectFit="cover" />
       </div>
     );
   };
 
   const renderName = () => {
     const minimalClasses =
-      variant === "CTA" ? "absolute inset-x-0 top-0 p-4" : "";
+      variant === "CTA" ? "absolute inset-x-0 top-0 p-4 text-lg" : "";
 
     return (
       <h3
@@ -172,7 +106,8 @@ export const M5ProductCard = ({
     return (
       <p className="product-price flex items-center justify-center gap-2 text-center text-lg font-bold text-secondary-disabled">
         <small className="text-sm font-normal">{priceCurrency} </small>
-        <span>${price.toLocaleString()}</span>
+
+        {price && <span>${price.toLocaleString()}</span>}
 
         {priceDiscounted && (
           <span className="font-normal text-secondary-disabled line-through">
@@ -185,7 +120,7 @@ export const M5ProductCard = ({
 
   const renderPickupPoint = () => {
     return (
-      <p className="product-pickup-point flex items-center justify-center text-sm text-secondary-disabled">
+      <p className="product-pickup-point my-1 flex items-center justify-center text-sm text-secondary-disabled">
         <A2Icon name={IconNames.MAP_ICON} classList="mr-2" />
         {pickupPoint}
       </p>
@@ -201,7 +136,7 @@ export const M5ProductCard = ({
     };
 
     return (
-      <ul className="product-features mt-4 flex justify-evenly rounded-lg border border-[#b8b8b8]">
+      <ul className="product-features mt-auto flex justify-evenly rounded-lg border border-[#b8b8b8]">
         {features?.map(({ type, value }, index) => (
           <li
             key={`${type}-${value}-${index}`}
@@ -290,10 +225,10 @@ export const M5ProductCard = ({
 
   const renderContent = () => {
     return (
-      <div className="product-data p-4">
+      <div className="product-data flex h-full flex-col items-stretch p-4">
         {variant === "full" && swatches && renderSwatches()}
         {renderName()}
-        {variant !== "CTA" && renderPrice()}
+        {variant !== "CTA" && price && renderPrice()}
         {variant === "full" && pickupPoint && renderPickupPoint()}
         {variant === "full" && features && renderFeatures()}
         {variant !== "CTA" && isOnSale && renderOnSale()}
@@ -306,7 +241,7 @@ export const M5ProductCard = ({
   const renderProduct = () => {
     return (
       <article
-        className={`${classList} relative flex max-w-[300px] flex-col rounded-lg border border-[#b8b8b8]`}
+        className={`${classList} relative flex flex-col rounded-lg border border-[#b8b8b8]`}
       >
         {renderImage()}
         {renderContent()}
