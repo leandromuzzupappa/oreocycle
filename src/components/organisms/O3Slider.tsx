@@ -34,7 +34,7 @@ type O3SliderProps = {
 
 export const O3Slider = ({
   children,
-  id = `slider-${Math.floor(Math.random() * 1000)}`,
+  id = `slider-1`,
   slides,
   options,
 }: O3SliderProps) => {
@@ -96,7 +96,7 @@ export const O3Slider = ({
       </div>
 
       {arrows && (
-        <div className="slider-controls text-purple absolute top-[50%] z-10 hidden w-full -translate-y-2/4 justify-between lg:flex">
+        <div className="slider-controls absolute top-[50%] z-10 hidden w-full -translate-y-2/4 justify-between text-purple lg:flex">
           <M4SliderArrow
             direction="prev"
             classList="-left-20"
@@ -113,7 +113,7 @@ export const O3Slider = ({
       )}
 
       {pagination && (
-        <div className="slider-pagination flex w-full justify-center gap-4 p-3">
+        <div className="slider-pagination flex w-full justify-center gap-4 p-6">
           {scrollSnaps.map((_, index) => (
             <A3SliderPaginationButton
               key={index}
