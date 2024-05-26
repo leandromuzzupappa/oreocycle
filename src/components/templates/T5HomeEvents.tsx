@@ -60,7 +60,7 @@ export const T5HomeEvents = () => {
           <A4SliderSlide key={index}>
             <M5ProductCard
               {...props}
-              classList="border-[#EDEDED] bg-white mx-3 overflow-hidden rounded-lg h-full"
+              classList="border-[#ebebeb] bg-white mx-3 overflow-hidden rounded-lg h-full"
             />
           </A4SliderSlide>
         ))}
