@@ -65,7 +65,7 @@ enum FeatureTypeNamesMap {
 }
 
 export const M5ProductCard = ({
-  variant = "minimal",
+  variant,
   name,
   image,
   price,
@@ -95,7 +95,7 @@ export const M5ProductCard = ({
 
     return (
       <h3
-        className={`product-name w-full text-center text-2xl font-bold leading-tight ${minimalClasses}`}
+        className={`product-name w-full text-center text-xl font-bold leading-tight ${minimalClasses}`}
       >
         {name}
       </h3>
