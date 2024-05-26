@@ -4,7 +4,7 @@ import { accessoriesMock } from "@data/mock/accessories";
 import { motocyclesMock } from "@data/mock/motocycles";
 import { Product } from "@data/types/product";
 
-type Category = "accessories" | "motocycles";
+export type Category = "accessories" | "motorcycles";
 
 export const getProducts = async (category: Category): Promise<Product[]> => {
   try {
@@ -14,19 +14,18 @@ export const getProducts = async (category: Category): Promise<Product[]> => {
     if (process.env.DEBUG == "true")
       return category === "accessories" ? accessoriesMock : motocyclesMock;
 
-    const productData = fetch(endpoints[category], {
+    const productData = fetch(endpoints.base + endpoints[category], {
       headers: { Authorization: `Bearer ${process.env.AUTH_TOKEN}` },
     });
 
-    const products: Product[] = await productData.then((res) => res.json());
-
+    const products = await (await productData).json();
     return products;
   } catch (error) {
     if (process.env.DEBUG == "true")
       console.log("Error getting products: ", { error, category });
 
     console.log("Cannot get the products data, retrieving local data instead");
-    return category === "accessories" ? accessoriesMock : motocyclesMock;
+    return [];
   }
 };
 
@@ -46,11 +45,16 @@ export const getProductById = async ({
       : motocyclesMock.find((product) => product.uuid === id);
 
   try {
-    const productData = fetch(`${endpoints[category]}?uuid=${id}`, {
-      headers: { Authorization: `Bearer ${process.env.AUTH_TOKEN}` },
-    });
+    const productData = fetch(
+      `${endpoints.base + endpoints[category]}?uuid=${id}`,
+      {
+        headers: { Authorization: `Bearer ${process.env.AUTH_TOKEN}` },
+      },
+    );
 
-    const product: Product = await productData.then((res) => res.json());
+    const product = await (await productData).json();
+
+    if (!product) throw new Error("Product not found");
 
     return product;
   } catch (error) {
@@ -62,8 +66,6 @@ export const getProductById = async ({
       });
 
     console.log("Cannot get the product data, retrieving local data instead");
-    return category === "accessories"
-      ? accessoriesMock.find((product) => product.uuid === id)
-      : motocyclesMock.find((product) => product.uuid === id);
+    return undefined;
   }
 };

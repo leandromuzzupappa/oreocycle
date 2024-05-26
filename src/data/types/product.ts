@@ -1,6 +1,6 @@
 export enum CategoryEnum {
   ACCESSORIES = "accessories",
-  MOTOCYCLES = "motocycles",
+  MOTORCYCLES = "motorcycles",
 }
 
 export type Product = {

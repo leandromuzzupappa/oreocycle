@@ -5,5 +5,5 @@ export const endpoints = {
   config: "/config",
   createLead: "/createlead",
   accessories: "/products/accessories",
-  motocycles: "/products/motorcycles",
+  motorcycles: "/products/motorcycles",
 };

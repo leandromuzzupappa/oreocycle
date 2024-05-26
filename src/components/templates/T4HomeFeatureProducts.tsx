@@ -12,7 +12,7 @@ export const T4HomeFeatureProducts = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const products = await getProducts(CategoryEnum.MOTOCYCLES);
+      const products = await getProducts(CategoryEnum.MOTORCYCLES);
       const banProducts = [
         "Interceptor 650 Standard",
         "Continental GT 650 Standard",
