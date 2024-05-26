@@ -4,7 +4,7 @@ import { M1HeaderNav } from "@molecules/M1HeaderNav";
 
 export const O1Header = () => {
   return (
-    <header className="flex justify-between gap-4 px-8 py-6 align-middle">
+    <header className="fixed z-20 flex w-full justify-between gap-4 px-8 py-6 align-middle">
       <Link href="/">
         <A2Icon
           name={IconNames.SIMPLI_LOGO}
