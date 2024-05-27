@@ -1,6 +1,6 @@
 import { A1Link } from "@atoms/A1Link";
 
-type M7TextBannerProps = {
+export type M7TextBannerProps = {
   headline: string;
   linkLabel?: string;
   link?: string;

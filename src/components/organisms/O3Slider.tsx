@@ -16,7 +16,7 @@ export type O3OptionsType = EmblaOptionsType & {
   slidesPerView?: number;
 };
 
-type O3SliderProps = {
+export type O3SliderProps = {
   children?: React.ReactNode;
   id?: string;
   slides?: {
