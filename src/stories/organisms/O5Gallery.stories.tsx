@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { O5Gallery, O5GalleryProps } from "@organisms/O5Gallery";
+import { O5Gallery } from "@organisms/O5Gallery";
 
 export default {
   title: "Organisms/O5Gallery",
