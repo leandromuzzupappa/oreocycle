@@ -27,7 +27,7 @@ export const T4HomeFeatureProducts = () => {
           variant: "CTA",
           name,
           image: variants[0].images[0].formats?.thumbnail?.url || "",
-          link: `/${slug}`,
+          link: `/${CategoryEnum.MOTORCYCLES}/${slug}`,
         }),
       );
 

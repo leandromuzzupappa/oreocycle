@@ -17,7 +17,7 @@ export const T1HomeAccessories = () => {
         return {
           headline: name,
           ctaLabel: "Ver más",
-          slug,
+          slug: `/${CategoryEnum.ACCESSORIES}/${slug}`,
           image: variants[0].images[0].url,
           alt: name,
           lazy: true,
