@@ -10,9 +10,10 @@ import { usePrevNextButtons } from "@hooks/useSliderButtons";
 import { useSliderPagination } from "@hooks/useSliderPagination";
 
 export type O3OptionsType = EmblaOptionsType & {
-  classList?: { container: string; slide: string };
+  classList?: { container?: string; slide?: string; arrows?: string };
   pagination?: boolean;
   arrows?: boolean;
+  arrowsWithin?: boolean;
   slidesPerView?: number;
 };
 
@@ -20,14 +21,14 @@ export type O3SliderProps = {
   children?: React.ReactNode;
   id?: string;
   slides?: {
-    headline: string;
-    description: string;
-    eyebrow: string;
-    ctaLabel: string;
-    slug: string;
+    headline?: string;
+    description?: string;
+    eyebrow?: string;
+    ctaLabel?: string;
+    slug?: string;
     image: string;
     alt: string;
-    overlay: boolean | { show: boolean; color: string; opacity: number };
+    overlay?: boolean | { show: boolean; color: string; opacity: number };
   }[];
   options: O3OptionsType;
 };
@@ -99,13 +100,13 @@ export const O3Slider = ({
         <div className="slider-controls absolute top-[50%] z-10 hidden w-full -translate-y-2/4 justify-between text-purple lg:flex">
           <M4SliderArrow
             direction="prev"
-            classList="-left-20"
+            classList={`${options.arrowsWithin ? "-left-20" : "left-2"} ${classList?.arrows ?? ""}`}
             onClick={onPrevButtonClick}
             disabled={prevBtnDisabled}
           />
           <M4SliderArrow
             direction="next"
-            classList="-right-20"
+            classList={`${options.arrowsWithin ? "-right-20" : "right-2"} ${classList?.arrows ?? ""}`}
             onClick={onNextButtonClick}
             disabled={nextBtnDisabled}
           />

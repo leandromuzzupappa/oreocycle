@@ -50,7 +50,7 @@ export const O5Gallery = () => {
           isOnSale,
           badge,
           swatches,
-          link: `/${category}/${product.uuid}`,
+          link: `${category}/${product.slug}?uuid=${product.uuid}`,
           classList: "border-2",
         };
       });

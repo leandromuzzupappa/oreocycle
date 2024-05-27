@@ -16,7 +16,7 @@ export const M4SliderArrow = ({
 }: M4SliderArrowProps) => {
   return (
     <button
-      className={`${classList} dsa relative w-10 ${restProps.disabled ? "cursor-not-allowed opacity-50" : ""}`}
+      className={`slider-arrows slider-arrow-${direction} ${classList} relative w-10 ${restProps.disabled ? "cursor-not-allowed opacity-50" : ""}`}
       type="button"
       {...restProps}
     >

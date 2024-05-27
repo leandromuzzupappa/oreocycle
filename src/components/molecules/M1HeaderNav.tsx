@@ -58,7 +58,7 @@ export const M1HeaderNav = () => {
         <ul className="space-y-4 border-t-2 border-[#D5D5D5] py-14">
           {menuItems.map(({ label, slug, newTab }) => (
             <li key={`header-link-${slug}`}>
-              <A1Link label={label} url={slug} newTab={newTab} />
+              <A1Link label={label} url={"/" + slug} newTab={newTab} />
             </li>
           ))}
         </ul>
@@ -82,7 +82,7 @@ export const M1HeaderNav = () => {
         <ul className="flex gap-4">
           {menuItems.map(({ label, slug, newTab }) => (
             <li key={`header-link-${slug}`} className="hover:text-primary">
-              <A1Link label={label} url={slug} newTab={newTab} />
+              <A1Link label={label} url={"/" + slug} newTab={newTab} />
             </li>
           ))}
         </ul>
