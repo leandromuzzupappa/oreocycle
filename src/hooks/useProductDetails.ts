@@ -12,8 +12,6 @@ export const useProductDetails = ({
   category,
   slug,
 }: UseProductDetailsType) => {
-  console.log("l", product);
-
   const breadcrumbsLinks = [
     { label: "Home", url: "/" },
     { label: category, url: `/${category}` },
@@ -26,6 +24,7 @@ export const useProductDetails = ({
       slide: "h-[450px] ",
     },
     arrows: true,
+    arrowsWithin: true,
     pagination: true,
     loop: true,
   };

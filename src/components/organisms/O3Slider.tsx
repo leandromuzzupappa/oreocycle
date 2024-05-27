@@ -100,13 +100,13 @@ export const O3Slider = ({
         <div className="slider-controls absolute top-[50%] z-10 hidden w-full -translate-y-2/4 justify-between text-purple lg:flex">
           <M4SliderArrow
             direction="prev"
-            classList={`${options.arrowsWithin ? "-left-20" : "left-2"} ${classList?.arrows ?? ""}`}
+            classList={`${!options.arrowsWithin ? "-left-20" : "left-2"} ${classList?.arrows ?? ""}`}
             onClick={onPrevButtonClick}
             disabled={prevBtnDisabled}
           />
           <M4SliderArrow
             direction="next"
-            classList={`${options.arrowsWithin ? "-right-20" : "right-2"} ${classList?.arrows ?? ""}`}
+            classList={`${!options.arrowsWithin ? "-right-20" : "right-2"} ${classList?.arrows ?? ""}`}
             onClick={onNextButtonClick}
             disabled={nextBtnDisabled}
           />
