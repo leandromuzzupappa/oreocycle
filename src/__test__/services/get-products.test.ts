@@ -14,12 +14,14 @@ describe("get product data", () => {
   it("should return the mock data if DEBUG is true", async () => {
     process.env.DEBUG = "true";
 
-    const data = await getProducts(CategoryEnum.MOTOCYCLES);
+    const data = await getProducts(CategoryEnum.MOTORCYCLES);
     expect(data).toEqual(motocyclesMock);
   });
 
   it("should return the motocycles data", async () => {
-    const data = await getProducts(CategoryEnum.MOTOCYCLES);
+    process.env.DEBUG = "true";
+
+    const data = await getProducts(CategoryEnum.MOTORCYCLES);
     expect(data).toEqual(motocyclesMock);
   });
 
@@ -44,14 +46,18 @@ describe("get product data", () => {
 
   // Get product by ID
   it("should return the motocycle by id", async () => {
+    process.env.DEBUG = "true";
+
     const data = await getProductById({
       id: bikeID,
-      category: CategoryEnum.MOTOCYCLES,
+      category: CategoryEnum.MOTORCYCLES,
     });
     expect(data).toEqual(motocyclesMock[0]);
   });
 
   it("should return the accessory by id", async () => {
+    process.env.DEBUG = "true";
+
     const data = await getProductById({
       id: accessoryID,
       category: CategoryEnum.ACCESSORIES,
@@ -60,14 +66,18 @@ describe("get product data", () => {
   });
 
   it("should return undefined if the product is not found", async () => {
+    process.env.DEBUG = "true";
+
     const data = await getProductById({
       id: "invalid",
-      category: CategoryEnum.MOTOCYCLES,
+      category: CategoryEnum.MOTORCYCLES,
     });
     expect(data).toBeUndefined();
   });
 
   it("should return an error if the category is not found", async () => {
+    process.env.DEBUG = "true";
+
     try {
       await getProductById({ id: bikeID, category: "invalid" as CategoryEnum });
     } catch (error) {
