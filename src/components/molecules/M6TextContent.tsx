@@ -1,4 +1,4 @@
-type M6TextContentProps = {
+export type M6TextContentProps = {
   headline: string;
   description?: string;
   eyebrow?: string;

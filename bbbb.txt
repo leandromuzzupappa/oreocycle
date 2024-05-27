@@ -1,0 +1,33 @@
+https://genesis.mightyhive.com/aichat/chat/EItKlI8BaleRyX-QvyrT
+https://genesis.mightyhive.com/aichat/chat/IIuDlI8BaleRyX-Q3iq8
+https://tailwindcss.com/docs/guides/nextjs
+https://play.tailwindcss.com/
+https://nextjs.org/docs/pages/building-your-application/optimizing/fonts#local-fonts
+https://tailwindcss.com/docs/customizing-colors
+https://www.youtube.com/watch?v=9kjc6SWxBIA
+https://www.youtube.com/watch?v=jTRfhbWRuro
+https://github.dev/developedbyed/next14-query-combo-cache-destroyer/blob/master/package.json
+https://tanstack.com/query/latest/docs/framework/react/guides/queries
+https://tanstack.com/query/latest/docs/framework/react/examples/simple
+https://github.com/leandromuzzupappa/vite-react/blob/main/src/hooks/useDebounce.ts
+https://github.dev/leandromuzzupappa/react-query-test
+https://tailwindcss.com/docs/flex#flex-1
+https://agency-code.googlesource.com/cros-demo-mode-cbx/+/refs/heads/develop/src/components/organisms/
+https://github.com/pmndrs/zustand
+https://medium.com/@mak-dev/zustand-with-next-js-14-server-components-da9c191b73df
+https://github.dev/HamedBahram/next-zustand
+https://www.youtube.com/watch?v=u5A7GnQEKbg
+https://www.youtube.com/results?search_query=next+js+14+jest
+https://www.youtube.com/watch?v=BxohoXjbhKc
+https://bitbucket.org/mediamonks/mediamonks-frontend-nextjs-skeleton/src/main/source/frontend/
+
+test
+FIGMA: evict-plasma-cheer-jade
+Auth Token: qwertyuiopasdfghjklzxcvbnm1234
+
+https://www.figma.com/design/FRQb4a1ho9FRqRfMRzmcB1/SimpliMuv-FE-Test?node-id=1-19
+https://motos-ecommerce.vercel.app/motorcycles
+https://github.dev/jessicablossom/motorcycle-ecommerce/blob/main/.env
+https://github.com/juanzitelli/simplimuv-challenge/blob/main/frontend/package.json
+https://app.quicktype.io/
+https://documenter.getpostman.com/view/4594074/2sA2xmVWkb#a357ce55-8274-4e22-a264-2aa7887be182

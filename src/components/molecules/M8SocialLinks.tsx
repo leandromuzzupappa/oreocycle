@@ -1,7 +1,7 @@
 import { A1Link } from "@atoms/A1Link";
 import { A2Icon, IconNames } from "@atoms/A2Icon";
 
-type M8SocialLinksProps = {
+export type M8SocialLinksProps = {
   hideLabel?: boolean;
 };
 

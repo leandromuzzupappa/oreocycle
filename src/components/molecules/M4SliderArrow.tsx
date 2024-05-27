@@ -1,6 +1,6 @@
 import { A2Icon, IconNames } from "@atoms/A2Icon";
 
-type ButtonType = {
+export type M4SliderArrowProps = {
   classList?: string;
   disabled: boolean;
   children?: React.ReactNode;
@@ -13,7 +13,7 @@ export const M4SliderArrow = ({
   children,
   direction = "next",
   ...restProps
-}: ButtonType) => {
+}: M4SliderArrowProps) => {
   return (
     <button
       className={`${classList} dsa relative w-10 ${restProps.disabled ? "cursor-not-allowed opacity-50" : ""}`}
